@@ -1,6 +1,8 @@
 package com.example.project1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,22 +14,27 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Gson gson = new Gson();
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView = findViewById(R.id.recycler_view);
 
 
-        String jsonFileString = Utils.getJSONFromAssets(getApplicationContext(), "recipes.json");
-        //Log.i("data", jsonFileString);
-        Gson gson = new Gson();
-        Type listUserType = new TypeToken<List<Recipe>>() { }.getType();
-        List<Recipe> recipes = gson.fromJson(jsonFileString, listUserType);
-        for (int i = 0; i < recipes.size(); i++) {
-            Log.i("data", "> Item " + i + "\n" + recipes.get(i));
-        }
+        // import the recipes
+        Recipes recipes = new Recipes().fromJSONFile(getApplicationContext(), "christmas_recipes.json");
+        String[] recipesNames = recipes.getNames();
+        String[] recipesUrls = recipes.getUrls();
+
+        Log.i("new", "1");
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.scrollToPosition(0);
+        recyclerView.setLayoutManager(layoutManager);
+
+
     }
 
 }

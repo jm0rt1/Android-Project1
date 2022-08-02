@@ -3,7 +3,7 @@ package com.example.project1;
 import java.util.List;
 
 public class Recipe {
-    String name;
+    String Name;
     String url;
     String Description;
     String Author;
@@ -14,7 +14,7 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" +
-                "name='" + name + '\n' +
+                "name='" + Name + '\n' +
                 ", url=" + url +
                 ", Description=" + Description + '\n' +
                 ", Author=" + Author + '\n' +
@@ -25,7 +25,3 @@ public class Recipe {
 }
 
 
-public class Recipes extends List{
-
-    public Recipes fromFile
-}
