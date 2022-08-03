@@ -14,7 +14,7 @@ import java.util.List;
 //data set https://frosch.cosy.sbg.ac.at/datasets/json/recipes/-/blob/main/recipes.json
 public class Recipes {
     List<Recipe> data;
-
+    int DATA_SIZE_CAP = 50;
     public Recipes() {
     }
     public Recipes fromJSONFile(Context c, String file_name) {
@@ -24,14 +24,18 @@ public class Recipes {
         Type listUserType = new TypeToken<List<Recipe>>() {
         }.getType();
         data = gson.fromJson(jsonFileString, listUserType);
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = data.size()-1; i>=DATA_SIZE_CAP; i--){
+            data.remove(i);
+        }
+
+        for (int i = 0; i < data.size() && i<DATA_SIZE_CAP; i++) {
             Log.i("data", "> Item " + i + "\n" + data.get(i));
         }
         return this;
     }
 
     public String[] getNames(){
-        String[] names= new String[data.size()];
+        String[] names= new String[DATA_SIZE_CAP];
         for (int i=0; i<this.data.size(); i++){
             String name = this.data.get(i).Name;
             names[i] = name;
@@ -40,7 +44,7 @@ public class Recipes {
     }
 
     public String[] getUrls(){
-        String[] urls= new String[data.size()];
+        String[] urls= new String[DATA_SIZE_CAP];
         for (int i=0; i<this.data.size(); i++){
             String name = this.data.get(i).url;
             urls[i] = name;
