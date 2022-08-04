@@ -54,6 +54,8 @@ public class RecipeCardRecylcerAdapter extends RecyclerView.Adapter<RecipeCardVi
                     intent.putStringArrayListExtra("Ingredients",  a1);
                     ArrayList<String> a2 = new ArrayList<String>(data.get(position).Method);
                     intent.putStringArrayListExtra("Instructions",  a2);
+                    String a3 = data.get(position).Name;
+                    intent.putExtra("Name",  a3);
                     c.startActivity(intent);
                 } catch (Exception ex) {
                     Log.e("1", ex.toString());

@@ -6,9 +6,6 @@
 
         android:icon="@drawable/heart"
         android:title="@string/like"/>
-    <item
-        app:showAsAction="never"
-        android:id="@+id/show_favorites"
-        android:title="@string/show_favorites"/>
+
 
 </menu>

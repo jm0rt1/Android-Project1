@@ -16,9 +16,13 @@
         android:theme="@style/Theme.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".FavoritesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecipeInstructionsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

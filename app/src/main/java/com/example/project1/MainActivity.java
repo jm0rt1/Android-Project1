@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -27,13 +28,17 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     public static final String TAG = "MainActivity";
+    public static ArrayList<String> favorites = new ArrayList<>();
+
     ProgressDialog p;
-    Recipes recipes;
+    static Recipes recipes;
+    LinearLayoutManager layoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         // import the recipes
         recipes = new Recipes().fromJSONFile(getApplicationContext(), "christmas_recipes.json");
-        String[] recipesNames = recipes.getNames();
-        String[] recipesUrls = recipes.getUrls();
 
-        Thread[] threads = getImages();
+        getImages();
 
 
         Log.i("new", "1");
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
@@ -78,8 +81,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.show_favorites:
-                Toast toast = Toast.makeText(getApplicationContext(),"Like Clicked", Toast.LENGTH_SHORT);
-                toast.show();
+                try{
+                    Intent intent = new Intent(getApplicationContext(), FavoritesActivity.class);
+                    startActivity(intent);
+                } catch (Exception ex){
+                    Log.e("favorites", ex.toString());
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

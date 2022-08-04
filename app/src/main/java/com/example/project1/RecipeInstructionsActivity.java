@@ -19,6 +19,7 @@ import java.util.List;
 
 public class RecipeInstructionsActivity extends AppCompatActivity {
     public static final String TAG = "RecipeInstructionsActi";
+    String name;
     ArrayList<String> ingredients;
     ArrayList<String> instructions;
     @Override
@@ -29,6 +30,8 @@ public class RecipeInstructionsActivity extends AppCompatActivity {
             Intent intent = getIntent();
             ingredients =  intent.getStringArrayListExtra("Ingredients");
             instructions =  intent.getStringArrayListExtra("Instructions");
+            name = intent.getStringExtra("Name");
+
 
             Toolbar myToolbar = findViewById(R.id.my_toolbar);
             setSupportActionBar(myToolbar);
@@ -61,12 +64,7 @@ public class RecipeInstructionsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.like:
-                Toast toast = Toast.makeText(getApplicationContext(),"Like Clicked", Toast.LENGTH_SHORT);
-                toast.show();
-                return true;
-            case R.id.show_favorites:
-                toast = Toast.makeText(getApplicationContext(),"two Clicked", Toast.LENGTH_SHORT);
-                toast.show();
+                MainActivity.favorites.add(name);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
