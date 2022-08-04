@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 public class RecipeInstructionsActivity extends AppCompatActivity {
     public static final String TAG = "RecipeInstructionsActi";
@@ -23,4 +25,14 @@ public class RecipeInstructionsActivity extends AppCompatActivity {
             Log.e(TAG,e.toString());
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+
 }
