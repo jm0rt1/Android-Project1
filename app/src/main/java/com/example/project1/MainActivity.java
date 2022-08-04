@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.show_favorites:
+                Toast toast = Toast.makeText(getApplicationContext(),"Like Clicked", Toast.LENGTH_SHORT);
+                toast.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     private Thread[] getImages(){
         Thread[] threads = new Thread[recipes.data.size()];

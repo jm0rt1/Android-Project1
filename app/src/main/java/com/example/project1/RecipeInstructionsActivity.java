@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 public class RecipeInstructionsActivity extends AppCompatActivity {
     public static final String TAG = "RecipeInstructionsActi";
@@ -30,9 +32,24 @@ public class RecipeInstructionsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
+        inflater.inflate(R.menu.recipe_menu, menu);
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.like:
+                Toast toast = Toast.makeText(getApplicationContext(),"Like Clicked", Toast.LENGTH_SHORT);
+                toast.show();
+                return true;
+            case R.id.show_favorites:
+                toast = Toast.makeText(getApplicationContext(),"two Clicked", Toast.LENGTH_SHORT);
+                toast.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
