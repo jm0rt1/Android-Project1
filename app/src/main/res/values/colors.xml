@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="christmas_red">#FFf73939</color>
+    <color name="christmas_green">#FF165B33</color>
+    <color name="christmas_dark_spring_green">#146B3A</color>
+
+    <color name="christmas_firebrick">#BB2528</color>
+    <color name="christmas_cinnabar">#EA4630</color>
+    <color name="christmas_orange_yellow">#F8B229</color>
+    <color name="recipe_card_background">#FF21605E</color>
+
+
 </resources>

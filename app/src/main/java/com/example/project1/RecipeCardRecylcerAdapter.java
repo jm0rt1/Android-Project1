@@ -2,10 +2,12 @@ package com.example.project1;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.app.Activity;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,8 +43,8 @@ public class RecipeCardRecylcerAdapter extends RecyclerView.Adapter<RecipeCardVi
 
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(c.getApplicationContext(),"clicked "+data.get(position).Name, Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent = new Intent(c, RecipeInstructionsActivity.class);
+                c.startActivity(intent);
 
             }
 

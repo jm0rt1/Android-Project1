@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setSupportActionBar(findViewById(R.id.custom_toolbar));
+
         recyclerView = findViewById(R.id.recycler_view);
 
         // import the recipes
