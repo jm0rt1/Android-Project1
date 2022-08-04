@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/like"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
 
         android:icon="@drawable/heart"
-        android:title="Like"/>
+        android:title="@string/like"/>
     <item
         app:showAsAction="never"
         android:id="@+id/show_favorites"
-        android:title="Show Favorites"/>
+        android:title="@string/show_favorites"/>
 
 </menu>

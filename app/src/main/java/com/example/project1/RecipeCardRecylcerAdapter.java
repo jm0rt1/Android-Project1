@@ -3,6 +3,8 @@ package com.example.project1;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.app.Activity;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeCardRecylcerAdapter extends RecyclerView.Adapter<RecipeCardViewHolder> {
@@ -43,8 +47,18 @@ public class RecipeCardRecylcerAdapter extends RecyclerView.Adapter<RecipeCardVi
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(c, RecipeInstructionsActivity.class);
-                c.startActivity(intent);
+                try{
+                    Intent intent = new Intent(c, RecipeInstructionsActivity.class);
+
+                    ArrayList<String> a1 = new ArrayList<String>(data.get(position).Ingredients);
+                    intent.putStringArrayListExtra("Ingredients",  a1);
+                    ArrayList<String> a2 = new ArrayList<String>(data.get(position).Method);
+                    intent.putStringArrayListExtra("Instructions",  a2);
+                    c.startActivity(intent);
+                } catch (Exception ex) {
+                    Log.e("1", ex.toString());
+                }
+
 
             }
 

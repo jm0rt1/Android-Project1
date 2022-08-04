@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.File;
@@ -11,7 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements Parcelable {
     String Name;
     String url;
     String Description;
@@ -19,6 +21,28 @@ public class Recipe {
     List<String> Ingredients;
     List<String> Method;
     Bitmap image;
+
+    protected Recipe(Parcel in) {
+        Name = in.readString();
+        url = in.readString();
+        Description = in.readString();
+        Author = in.readString();
+        Ingredients = in.createStringArrayList();
+        Method = in.createStringArrayList();
+        //image = in.readParcelable(Bitmap.class.getClassLoader());
+    }
+
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
 
     public void setImage(Bitmap image) {
         this.image = image;
@@ -95,6 +119,22 @@ public class Recipe {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Name);
+        dest.writeString(url);
+        dest.writeString(Description);
+        dest.writeString(Author);
+        dest.writeStringList(Ingredients);
+        dest.writeStringList(Method);
+        //dest.writeParcelable(image, flags);
+
+    }
 }
 
 

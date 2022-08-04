@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Project1</string>
+    <string name="like">Like</string>
+    <string name="show_favorites">Show Favorites</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="textview">TextView</string>
+    <string name="instructions">Instructions:</string>
 </resources>
