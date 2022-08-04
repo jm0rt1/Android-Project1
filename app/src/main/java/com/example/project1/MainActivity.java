@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,11 +26,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -52,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
         recipes = new Recipes().fromJSONFile(getApplicationContext(), "christmas_recipes.json");
 
         getImages();
-
+        try{
+            loadFavorites("favorites.txt");
+        } catch (Exception e){
+            Log.e(TAG,"Failed to load favorites");
+        }
 
         Log.i("new", "1");
         layoutManager = new LinearLayoutManager(this);
@@ -161,7 +170,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public  void loadFavorites(String fileName)
+    {
+        final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/folderName/" );
 
+        if (!dir.exists())
+        {
+            if(!dir.mkdirs()){
+                Log.e(TAG,"Failed to create the directories");
+            }
+        }
+        final File myFile = new File(dir, fileName);
+        Scanner s;
+        try{
+            s = new Scanner(myFile);
+            ArrayList<String> list = new ArrayList<String>();
+            while (s.hasNext()){
+                list.add(s.next());
+            }
+            s.close();
+        }catch (Exception e){
+            Log.e(TAG,e.toString());
+        }
+
+
+    }
 
 }
 

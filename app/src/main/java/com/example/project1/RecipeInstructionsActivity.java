@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,9 +69,42 @@ public class RecipeInstructionsActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.like:
                 MainActivity.favorites.add(name);
+                writeToFile("favorites.txt");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public  void writeToFile(String fileName)
+    {
+        try {
+            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/folderName/" );
+
+            if (!dir.exists())
+            {
+                if(!dir.mkdirs()){
+                    Log.e(TAG,"Failed to create the directories");
+                }
+            }
+
+            final File myFile = new File(dir, fileName + ".txt");
+            if (!myFile.exists())
+                myFile.createNewFile();
+
+            FileWriter writer = new FileWriter(myFile);
+            for(String str: MainActivity.favorites) {
+                try{
+                    writer.write(str);
+
+                } catch (Exception e){
+                    Log.e(TAG,e.toString());
+                }
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            Log.e(TAG,e.toString());
         }
     }
 
